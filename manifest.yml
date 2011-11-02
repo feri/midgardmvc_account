@@ -1,0 +1,5 @@
+version: 0.0.1
+
+process_injector: midgardmvc_account_injector
+template_injector: midgardmvc_account_injector
+

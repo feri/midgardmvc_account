@@ -1,0 +1,15 @@
+# Avatar provider: gravatar or other
+avatar_provider: gravatar
+
+# The URL prefix for fetching an avatar image
+avatar_host: http://www.gravatar.com/avatar
+
+# The secured URL for fetching an avatar image (preferred when SSL is used)
+avatar_secure_host: http://secure.gravatar.com/avatar
+
+# default width (in pixels) of the avatars
+avatar_width: 50
+
+# URL of the default avatar if no avatar is set
+default_avatar: /midgardmvc-static/midgardmvc_account/images/avatar.png
+

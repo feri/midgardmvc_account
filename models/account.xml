@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema xmlns="http://www.midgard-project.org/repligard/1.4">
+    <type name="midgardmvc_account" table="midgardmvc_account">
+        <property name="id" type="unsigned integer" primaryfield="id" index="yes">
+            <description>Local non-replication-safe database identifier</description>
+        </property>
+        <property name="personguid" type="guid" index="yes">
+            <description>Guid of the corresponding person object</description>
+        </property>
+        <property name="email" type="string">
+            <description>Email address of the person</description>
+        </property>
+        <property name="avatarurl" type="string">
+            <description>Avatar URL</description>
+        </property>
+    </type>
+</Schema>
