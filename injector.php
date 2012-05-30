@@ -31,7 +31,24 @@ class midgardmvc_account_injector
      */
     public function inject_template(midgardmvc_core_request $request)
     {
-        // todo
+        // Add the CSS and JS files needed by the component
+        $this->add_head_elements();
+    }
+
+    /**
+     * Adds js and css files to head
+     */
+    private function add_head_elements()
+    {
+        $this->mvc->head->add_link
+        (
+            array
+            (
+                'rel' => 'stylesheet',
+                'type' => 'text/css',
+                'href' => MIDGARDMVC_STATIC_URL . '/midgardmvc_account/css/account.css'
+            )
+        );
     }
 
     /**
@@ -134,7 +151,6 @@ class midgardmvc_account_injector
             }
         }
     }
-
 
     /**
      * Checks if an account exists with the given person guid

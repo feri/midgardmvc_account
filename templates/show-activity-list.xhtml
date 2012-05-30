@@ -1,0 +1,8 @@
+<h2 class="activities title" i18n:domain="midgardmvc_account" i18n:translate="'title_activity_list'"></h2>
+<ul class="list" tal:condition="true: midgardmvc_account/list">
+    <li tal:attributes="class activity/rowclass" tal:repeat="activity midgardmvc_account/list">
+        <span class="date" tal:content="php: gmdate('Y-m-d H:i e', strtotime(activity.metadata.created))"></span>
+        <span class="summary" tal:content="activity/summary"></span>
+        <span class="title" tal:condition="true: activity/target_obj/title" tal:content="activity/target_obj/title"></span>
+    </li>
+</ul>

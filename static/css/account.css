@@ -1,0 +1,43 @@
+h2.account.index.title {
+margin-bottom: 2em;
+}
+
+h2.activities.title {
+margin-bottom: 2em;
+}
+
+ul.list {
+padding: 0;
+margin: 0;
+}
+
+ul.list li {
+list-style: none;
+margin-bottom: 5px;
+line-height: 2em;
+}
+
+ul.list li.even {
+background-color: #cccccc;
+}
+
+ul.list span {
+display: inline-block;
+margin-right: 5em;
+}
+
+ul.list span.date {
+width: 12em;
+}
+
+ul.list span.summary {
+width: 25em;
+}
+
+ul.list span.title {
+width: 15em;
+}
+
+
+
+

@@ -1,5 +1,18 @@
-version: 0.0.1
+version: 0.0.2
 
 process_injector: midgardmvc_account_injector
 template_injector: midgardmvc_account_injector
 
+routes:
+    activities:
+        path: /
+        controller: midgardmvc_account_controllers_index
+        action: index
+        template_aliases:
+            content: show-index
+    activities:
+        path: /activities
+        controller: midgardmvc_account_controllers_activity
+        action: list
+        template_aliases:
+            content: show-activity-list
