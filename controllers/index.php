@@ -30,7 +30,5 @@ class midgardmvc_account_controllers_index
     public function get_index(array $args)
     {
         $user = $this->mvc->authentication->get_user();
-var_dump($user);
-die;
     }
 }

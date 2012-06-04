@@ -38,6 +38,9 @@ ul.list span.title {
 width: 15em;
 }
 
-
+ul.list li a.link {
+color: blue;
+text-decoration: underline;
+}
 
 

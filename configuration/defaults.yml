@@ -13,3 +13,17 @@ avatar_width: 50
 # URL of the default avatar if no avatar is set
 default_avatar: /midgardmvc-static/midgardmvc_account/images/avatar.png
 
+# activity configuration per application
+activity:
+    # application title
+    Apps:
+        # object that holds detailed info about the target
+        object: com_meego_package_details
+        # the guid field to find the details of the target
+        guidfield: packageguid
+        # method that returns a local link to the object
+        objectlink: com_meego_packages_controllers_application::get_localurl
+        # fields to display when listing the activity in a list
+        fields:
+            - packagetitle
+            - packageversion
