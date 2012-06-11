@@ -1,7 +1,7 @@
 <h2 class="activities title" i18n:domain="midgardmvc_account" i18n:translate="'title_activity_list'"></h2>
 <ul class="list" tal:condition="true: current_component/list">
     <li tal:attributes="class activity/rowclass" tal:repeat="activity midgardmvc_account/list">
-        <span class="date" tal:content="php: gmdate('Y-m-d H:i e', strtotime(activity.metadata.created))"></span>
+        <span class="date" tal:content="php: gmdate('Y-m-d H:i e', strtotime(activity.metadata.published))"></span>
         <span class="summary" tal:content="activity/summary"></span>
         <tal:block tal:condition="true: activity/extras" tal:repeat="field activity/extras">
             <tal:block tal:condition="not: activity/target_link">
