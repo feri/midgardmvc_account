@@ -44,6 +44,7 @@ class midgardmvc_account_controllers_activity
             new midgard_query_value($person->id)
         ));
 
+        $q->add_order(new midgard_query_property('metadata.published'), SORT_DESC);
         $q->toggle_readonly(false);
         $q->execute();
 
@@ -86,11 +87,91 @@ class midgardmvc_account_controllers_activity
 
             if (! $act->target_obj)
             {
-                $act->target_obj = midgard_object_class::get_object_by_guid($act->target);
+                try
+                {
+                    $act->target_obj = midgard_object_class::get_object_by_guid($act->target);
+                }
+                catch(Exception $e)
+                {
+                    $this->mvc->log(__CLASS__, 'Probably missing target of activity object: ' . $act->guid . '.', 'warning');
+                }
             }
 
             $this->data['list'][] = $act;
         }
         unset($acts, $act, $user, $person);
-   }
+    }
+
+    /**
+     * Creates an activity object
+     */
+    public function create_activity($person_guid, $verb, $target, $summary, $application, $date, $mvc = null)
+    {
+        $retval = false;
+
+        if (! $mvc)
+        {
+            $mvc = midgardmvc_core::get_instance();
+        }
+
+        try
+        {
+            $person = new midgard_person($person_guid);
+        }
+        catch (midgard_error_exception $e)
+        {
+            $mvc->log(__CLASS__, 'Person with GUID: ' . $person_guid . ' does not exist. Can not create activity object.', 'error');
+            return $retval;
+        }
+
+        $transaction = new midgard_transaction();
+        $transaction->begin();
+
+        // create new activity object
+        $activity = new midgard_activity();
+        $activity->actor = $person->id;
+        $activity->verb = $verb;
+        $activity->target = $target;
+        $activity->summary = $summary;
+        $activity->application = $application;
+
+        if ($date)
+        {
+            $activity->metadata->published = $date;
+        }
+
+        $retval = $activity->create();
+        if ($retval)
+        {
+            if ($date)
+            {
+                $mvc->log(__CLASS__, 'Activity object (guid: ' . $activity->guid . '): with verb: ' . $verb . ' successfully created for ' . $target, 'info');
+                $transaction->commit();
+            }
+            else
+            {
+                $activity->metadata->published = $activity->metadata->created;
+                $retval = $activity->update();
+                if ($retval)
+                {
+                    $mvc->log(__CLASS__, 'Activity object (guid: ' . $activity->guid . '): with verb: ' . $verb . ' successfully created for ' . $target, 'info');
+                    $transaction->commit();
+                }
+                else
+                {
+                    $mvc->log(__CLASS__, 'Failed to update the publishing date of activity object: ' . $activity->guid, 'warning');
+                    $transaction->rollback();
+                }
+            }
+        }
+        else
+        {
+            $mvc->log(__CLASS__, 'Failed to create ' . $verb . ' activity object for ' . $target, 'error');
+            $transaction->rollback();
+        }
+
+        unset($person);
+
+        return $retval;
+    }
 }
