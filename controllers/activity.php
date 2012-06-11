@@ -120,7 +120,7 @@ class midgardmvc_account_controllers_activity
         }
         catch (midgard_error_exception $e)
         {
-            $mvc->log(__CLASS__, 'Person with GUID: ' . $person_guid . ' does not exist. Can not create activity object.', 'error');
+            $mvc->log(__CLASS__, 'Person with GUID: ' . $person_guid . ' does not exist. Can not create activity object.', 'warning');
             return $retval;
         }
 
