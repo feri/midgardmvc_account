@@ -24,6 +24,7 @@ background-color: #cccccc;
 ul.list span {
 display: inline-block;
 margin-right: 5em;
+width: 11em;
 }
 
 ul.list span.date {
